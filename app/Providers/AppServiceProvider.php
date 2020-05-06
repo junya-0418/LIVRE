@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\BookService;
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\User\UserRepositoryInterface::class,
             \App\Repositories\User\UserRepository::class
         );
+
+        $this->app->bind('BookService', BookService::class);
     }
 
     /**

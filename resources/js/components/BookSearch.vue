@@ -40,7 +40,7 @@
                 this.booksInformations = []
 
                 this.loading = true
-                const response = await axios.post('api/search', {searchWord: this.searchWord})
+                const response = await axios.post('/api/search', {searchWord: this.searchWord})
                     .catch( error => { console.log(error); });
 
                 this.booksInformations = response.data
