@@ -34,31 +34,31 @@
         <script src="{{ mix('js/app.js') }}"></script>
         <!-- JQuery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            jQuery.noConflict();
-            $(function() {
-                $('.slider').slick({
-                    infinite: true,
-                    dots: false,
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                    responsive: [{
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                        }
-                    },{
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                        }
-                    }
-                    ]
-                });
-            });
-        </script>
+{{--        <script>--}}
+{{--            jQuery.noConflict();--}}
+{{--            $(function() {--}}
+{{--                $('.slider').slick({--}}
+{{--                    infinite: true,--}}
+{{--                    dots: false,--}}
+{{--                    slidesToShow: 5,--}}
+{{--                    slidesToScroll: 1,--}}
+{{--                    responsive: [{--}}
+{{--                        breakpoint: 768,--}}
+{{--                        settings: {--}}
+{{--                            slidesToShow: 3,--}}
+{{--                            slidesToScroll: 3,--}}
+{{--                        }--}}
+{{--                    },{--}}
+{{--                        breakpoint: 480,--}}
+{{--                        settings: {--}}
+{{--                            slidesToShow: 2,--}}
+{{--                            slidesToScroll: 2,--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                    ]--}}
+{{--                });--}}
+{{--            });--}}
+{{--        </script>--}}
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
