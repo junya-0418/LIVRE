@@ -16,10 +16,10 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
 
         <!-- Styles -->
-        <link href="{{ asset('css/index.css?v=0.1') }}" rel="stylesheet">
-        <link href="{{ asset('css/search.css?v=0.1') }}" rel="stylesheet">
-        <link href="{{ asset('css/popup.css?v=0.1') }}" rel="stylesheet">
-        <link href="{{ asset('css/show.css?v=0.1') }}" rel="stylesheet">
+{{--        <link href="{{ asset('css/index.css?v=0.1') }}" rel="stylesheet">--}}
+{{--        <link href="{{ asset('css/search.css?v=0.1') }}" rel="stylesheet">--}}
+{{--        <link href="{{ asset('css/popup.css?v=0.1') }}" rel="stylesheet">--}}
+{{--        <link href="{{ asset('css/show.css?v=0.1') }}" rel="stylesheet">--}}
         <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css?v=0.1') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css?v=0.1') }}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

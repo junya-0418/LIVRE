@@ -48,3 +48,84 @@
     }
 </script>
 
+<style>
+    html {
+        height: 100% !important;
+    }
+
+    body {
+        height: 100% !important;
+        margin: 0 !important;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .main {
+        background-color: black;
+        float: left;
+        position: fixed;
+        height: 100%;
+        color: #ccc;
+        border-right: solid 1px #fff;
+        width: 722px;
+        margin-right: 0px;
+    }
+
+    .right-column {
+        float: right;
+        color: #ccc;
+        background-color: black;
+        padding: 20px;
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .login-user-name {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: #ccc;
+    }
+
+
+    .new-books-card {
+        display: inline-flex;
+        margin-right: 5px;
+        margin-bottom: 50px;
+    }
+
+    .new-books-card-right {
+        max-width: 100px;
+    }
+
+    .newbooks-title {
+        margin-top: 50px;
+        font-size: 20px;
+        opacity: 0.7;
+        width: 180px;
+    }
+
+    .newbooks-book-title {
+        font-size: 18px;
+        margin-left: 15px;
+    }
+
+    .newbooks-book-author {
+        font-size: 15px;
+        margin-left: 15px;
+    }
+
+    .newbooks-book-publisher {
+        font-size: 12px;
+        margin-left: 15px;
+        opacity: 0.6;
+    }
+
+    .library-img-size {
+        max-height: 120px;
+        max-width: 144px;
+        width: 70% !important;
+    }
+</style>
+
