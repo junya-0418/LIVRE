@@ -23,9 +23,9 @@ Route::post('/search', 'BookController@search')->name('search');
 
 Route::post('/store', 'BookController@store')->name('store');
 
-Route::get('/user/{id}', 'UserController@show')->name('user.show');
+Route::get('/userCheck', fn() => Auth::user())->name('userCheck');
 
-Route::get('/user', fn() => Auth::user())->name('user');
+Route::get('/user/{id}', 'UserController@show')->name('user.show');
 
 Route::get('/books', 'BookController@index')->name('books');
 
