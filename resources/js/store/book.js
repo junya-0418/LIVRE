@@ -24,7 +24,13 @@ const mutations = {
 
 const actions = {
     async fetchBooks (context, data) {
-        const response = await axios.get(`/api/books/?page=${data}`)
+        const response = await axios.get(`/api/books/`,
+            {
+                params: {
+                    // ここにクエリパラメータを指定する
+                    page: data // このようにパラメータを付けるとhttpsになる
+                }
+            })
         context.commit('setBooks', response.data.data)
         context.commit('setCurrentPage', response.data.current_page)
         context.commit('setLastPage', response.data.last_page)

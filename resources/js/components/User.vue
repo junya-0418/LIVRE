@@ -74,8 +74,13 @@
         methods: {
             async fetchMyBooks() {
 
-                const response = await axios.get(`/api/user/${this.id}?page=${this.page}`)
-                // console.log(response.data)
+                const response = await axios.get(`/api/user/${this.id}`,
+                    {
+                        params: {
+                            page: this.page
+                        }
+                    })
+
                 this.bookLists = response.data.mybooks.data
                 this.username = response.data.username
                 this.$store.commit('book/setCurrentPage', response.data.mybooks.current_page)

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container--small" style="padding-top: 100px;">
+        <div class="container--small" style="padding-top: 50px;">
             <ul class="tab text-light" style="display: flex; justify-content: center;">
                 <li class="tab__item mr-5" :class="{'tab__item--active': tab === 1 }" @click="tab = 1">ログイン</li>
                 <li class="tab__item mr-5" :class="{'tab__item--active': tab === 2 }" @click="tab = 2">会員登録</li>

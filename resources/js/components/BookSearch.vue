@@ -23,6 +23,7 @@
 
 <script>
     import BookSearchChild from './BookSearchChild.vue'
+    import {SESSION_EXPIRED} from "../util";
 
     export default {
         components: {
@@ -42,6 +43,14 @@
                 this.loading = true
                 const response = await axios.post('/api/search', {searchWord: this.searchWord})
                     .catch( error => { console.log(error); });
+
+                if (response.status === SESSION_EXPIRED) {
+                    this.$store.commit('message/setContent', {
+                        content: 'セッションの有効期限が切れています。."\n".画面のリロードを行ってください',
+                        timeout: 8000
+                    })
+                    return false
+                }
 
                 this.booksInformations = response.data
                 this.loading = false

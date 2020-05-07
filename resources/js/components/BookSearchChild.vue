@@ -75,9 +75,6 @@
                     ? 'マイライブラリに追加済み'
                     : 'マイライブラリに追加'
             },
-            ...mapState({
-                message: state => state.message.content
-            })
         },
         methods: {
             async AddLibrary(index) {
