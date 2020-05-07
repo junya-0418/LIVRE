@@ -24,7 +24,7 @@ const mutations = {
 
 const actions = {
     async fetchBooks (context, data) {
-        const response = await axios.get(`/api/books/`,
+        const response = await axios.get(`/api/books`,
             {
                 params: {
                     // ここにクエリパラメータを指定する
