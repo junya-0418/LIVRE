@@ -30,33 +30,6 @@
 </div>
 </template>
 
-<style>
-    .book-detail-main {
-        display: flex;
-        width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 100px;
-        justify-content: center;
-    }
-
-    .book-detail-description {
-        font-size: 14px;
-        display: contents;
-    }
-
-    .book-detail-img_size {
-        max-height: 144px;
-        width: 90% !important;
-        padding-right: 70px;
-    }
-
-    .book-detail-username:hover {
-        text-decoration: underline;
-    }
-
-</style>
-
 <script>
     export default {
         props: {
@@ -87,3 +60,30 @@
 
     }
 </script>
+
+<style>
+    .book-detail-main {
+        display: flex;
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 100px;
+        justify-content: center;
+    }
+
+    .book-detail-description {
+        font-size: 14px;
+        display: contents;
+    }
+
+    .book-detail-img_size {
+        max-height: 144px;
+        width: 90% !important;
+        padding-right: 70px;
+    }
+
+    .book-detail-username:hover {
+        text-decoration: underline;
+    }
+
+</style>

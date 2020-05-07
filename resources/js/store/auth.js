@@ -54,6 +54,7 @@ const actions = {
         if (response.status === OK) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)
+            console.log(response.data)
             return false
         }
 
