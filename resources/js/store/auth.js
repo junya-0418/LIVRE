@@ -1,4 +1,4 @@
-import { OK, UNPROCESSABLE_ENTITY } from '../util'
+import {CREATED, OK, UNPROCESSABLE_ENTITY} from '../util'
 
 const state = {
     user: null,
@@ -33,7 +33,7 @@ const actions = {
         context.commit('setApiStatus', null)
         const response = await axios.post('/api/register', data)
 
-        if (response.status === OK) {
+        if (response.status === CREATED) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)
             return false
@@ -54,7 +54,6 @@ const actions = {
         if (response.status === OK) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)
-            console.log(response.data)
             return false
         }
 

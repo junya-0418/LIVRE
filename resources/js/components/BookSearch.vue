@@ -46,7 +46,7 @@
 
                 if (response.status === SESSION_EXPIRED) {
                     this.$store.commit('message/setContent', {
-                        content: 'セッションの有効期限が切れています。."\n".画面のリロードを行ってください',
+                        content: 'セッションの有効期限が切れています\n画面のリロードを行ってください',
                         timeout: 8000
                     })
                     return false
