@@ -61,12 +61,27 @@
                     : this.follow()
             },
             async follow() {
+                if (this.$store.getters['auth/check'] === false) {
+                    this.$store.commit('message/setContent', {
+                        content: 'フォローするにはログインを行ってください',
+                        timeout: 8000
+                    })
+                    return false
+                }
+
                 const response = await axios.put(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = true
                 this.$store.commit('follow/setFollowersCounts', response.data)
             },
             async unfollow() {
+                if (this.$store.getters['auth/check'] === false) {
+                    this.$store.commit('message/setContent', {
+                        content: 'フォロー解除にはログインを行ってください',
+                        timeout: 8000
+                    })
+                    return false
+                }
                 const response = await axios.delete(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = false

@@ -63,7 +63,7 @@
 
                 if (response.status === UNAUTHORIZED) {
                     this.$store.commit('message/setContent', {
-                        content: '読みたいはログイン後にできます',
+                        content: 'ログインを行ってください',
                         timeout: 8000
                     })
                     return false
@@ -77,7 +77,7 @@
 
                 if (response.status === UNAUTHORIZED) {
                     this.$store.commit('message/setContent', {
-                        content: '読みたい解除はログイン後にできます',
+                        content: 'ログインを行ってください',
                         timeout: 8000
                     })
                     return false
