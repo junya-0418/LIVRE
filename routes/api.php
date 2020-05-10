@@ -25,7 +25,19 @@ Route::post('/store', 'BookController@store')->name('store');
 
 Route::get('/userCheck', fn() => Auth::user())->name('userCheck');
 
+Route::get('/followCheck/{id}', 'UserController@followCheck')->name('followCheck');
+
+Route::get('/wantCheck/{id}', 'BookController@wantCheck')->name('wantCheck');
+
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
+
+Route::put('/follow/{id}', 'UserController@follow')->name('follow');
+
+Route::delete('/follow/{id}', 'UserController@unfollow')->name('unfollow');
+
+Route::put('/want/{id}', 'BookController@want')->name('want');
+
+Route::delete('/want/{id}', 'BookController@unwant')->name('unwant');
 
 Route::get('/books', 'BookController@index')->name('books');
 

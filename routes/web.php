@@ -13,18 +13,6 @@
 
 //Auth::routes();
 
-//Route::get('/', 'BookController@index');
-
-//Route::get('/search_form', 'BookController@showSearchForm')->name('search');
-
-Route::prefix('users')->name('users.')->group(function () {
-    Route::get('/{id}', 'UserController@show')->name('show');
-    Route::middleware('auth')->group(function () {
-        Route::put('/{id}/follow', 'UserController@follow')->name('follow');
-        Route::delete('/{id}/follow', 'UserController@unfollow')->name('unfollow');
-    });
-});
-
 Route::patch('/update/{id}', 'BookController@update')->name('update');
 
 Route::delete('/delete/{id}', 'BookController@delete')->name('delete');

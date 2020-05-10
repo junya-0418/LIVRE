@@ -5,6 +5,7 @@ import auth from './auth'
 import error from './error'
 import message from './message'
 import book from './book'
+import follow from "./follow";
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
         auth,
         error,
         message,
-        book
+        book,
+        follow
     }
 })
 

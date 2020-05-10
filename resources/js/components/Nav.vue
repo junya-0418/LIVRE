@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-md navbar-dark navbar-fixed-left" style="background-color: black;">
-            <a class="navbar-brand pl-2" href="/"><i class="far fa-sticky-note mr-1"></i>Book</a>
+            <a class="navbar-brand pl-2" href="/"><i class="far fa-sticky-note mr-1"></i>Livre</a>
             <div class="collapse navbar-collapse mt-4">
                 <ul class="pl-2" style="list-style: none;">
                     <li class="nav-item mb-3">

@@ -25,18 +25,25 @@
             <div class="book-detail-description text-light">
                 <span>{{ book.description  }}</span>
             </div>
+
+            <WantButton :id="id"></WantButton>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+    import WantButton from "./WantButton";
+
     export default {
         props: {
             id: {
                 type: String,
                 required: true,
             }
+        },
+        components: {
+            WantButton
         },
         data() {
             return {

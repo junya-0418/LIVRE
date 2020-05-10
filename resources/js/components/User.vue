@@ -9,6 +9,25 @@
         </h2>
     </div>
 
+    <div class="follow-area" style="display: flex;">
+        <div class="card-text" style="width: 600px;">
+            <div style="position: absolute; margin-left: 70px;">
+                <a href="" class="text-light">
+                    {{ followingsCounts }} フォロー
+                </a>
+                <a href="" class="text-light">
+                    {{ followersCounts }} フォロワー
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <follow-button class="ml-auto"
+                           :id="id">
+            </follow-button>
+        </div>
+    </div>
+
     <div style="padding-top: 50px;">
         <div style="text-align: -webkit-center;">
             <div class="mt-3 new-books-card" v-for="book in bookLists">
@@ -26,21 +45,12 @@
         </div>
     </div>
 
-    <div>
-<!--        <follow-button class="ml-auto"-->
-<!--                       :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'-->
-<!--                       :authorized='@json(Auth::check())'-->
-<!--                       :display-button='@json($display_follow_button)'-->
-<!--                       :followings-counts="@json($followingsCounts)"-->
-<!--                       :followers-counts="@json($followersCounts)"-->
-<!--                       endpoint="{{ route('users.follow', ['id' => $user->id]) }}">-->
-<!--        </follow-button>-->
-    </div>
 </div>
 </template>
 
 <script>
     import Pagination from '../components/Pagination.vue'
+    import FollowButton from "../components/FollowButton.vue";
     import { mapState } from 'vuex'
 
     export default {
@@ -56,17 +66,20 @@
             }
         },
         components: {
-            Pagination
+            Pagination,
+            FollowButton
         },
         data() {
             return {
                 bookLists : [],
                 uri: '/user/' + this.id,
-                username: ''
+                username: '',
             }
         },
         computed: {
             ...mapState({
+                followingsCounts: state => state.follow.followingsCounts,
+                followersCounts: state => state.follow.followersCounts,
                 currentPage: state => state.book.currentPage,
                 lastPage: state => state.book.lastPage,
             })
@@ -83,6 +96,8 @@
 
                 this.bookLists = response.data.mybooks.data
                 this.username = response.data.username
+                this.$store.commit('follow/setFollowingsCounts', response.data.followingsCounts)
+                this.$store.commit('follow/setFollowersCounts', response.data.followersCounts)
                 this.$store.commit('book/setCurrentPage', response.data.mybooks.current_page)
                 this.$store.commit('book/setLastPage', response.data.mybooks.last_page)
             },
@@ -116,7 +131,6 @@
     .follow-area {
         margin-top: 20px;
     }
-
 
 </style>
 

@@ -22,20 +22,18 @@ class UserController extends Controller
 
         $myBooks = $this->user_repository->getMyBooks($user->id);
 
-//        $display_follow_button = true;
+        $followingsCounts = $user->followings()->get()->count();
+        $followersCounts = $user->followers()->get()->count();
 
-//        if(Auth::check()) {
-//            if (Auth::user()->id === $user->id) {
-//                $display_follow_button = false;
-//            }
-//        } else {
-//            $display_follow_button = true;
-//        }
-//
-//        $followingsCounts = $user->followings()->get()->count();
-//        $followersCounts = $user->followers()->get()->count();
+        return ['mybooks' => $myBooks, 'username' => $user->name, 'followingsCounts' => $followingsCounts, 'followersCounts' => $followersCounts];
 
-        return ['mybooks' => $myBooks, 'username' => $user->name];
+    }
+
+    public function followCheck($id) {
+
+        $user = User::where('id', $id)->first();
+
+        return $user->isFollowedBy(Auth::user());
 
     }
 

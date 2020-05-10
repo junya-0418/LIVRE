@@ -1,21 +1,10 @@
 <template>
     <div>
-        <div style="float: right;">
-            <button class="btn-sm shadow-none border border-primary p-2" :class="[buttonColor, buttonShow]" @click="clickFollow">
+        <div style="float: right;" :class="hideFollowButton">
+            <button class="btn-sm shadow-none border border-primary p-2" :class="buttonColor" @click="clickFollow">
                 <i class="mr-1" :class="buttonIcon"></i>
                 {{ buttonText }}
             </button>
-        </div>
-
-        <div class="follow-area">
-            <div class="card-text">
-                <a href="" class="text-muted">
-                    {{ followingsCounts}} フォロー
-                </a>
-                <a href="" class="text-muted">
-                    {{ followersCounts }} フォロワー
-                </a>
-            </div>
         </div>
     </div>
 </template>
@@ -23,32 +12,14 @@
 <script>
     export default {
         props: {
-            initialIsFollowedBy: {
-                type: Boolean,
-                default: false,
-            },
-            authorized: {
-                type: Boolean,
-                default: false,
-            },
-            endpoint: {
+            id: {
                 type: String,
-            },
-            displayButton: {
-                type: Boolean,
-                default: true
-            },
-            followingsCounts: {
-                default: 0
-            },
-            followersCounts: {
-                default: 0
-            },
+                required: true
+            }
         },
         data() {
             return {
-                isFollowedBy: this.initialIsFollowedBy,
-                isSameUser: this.displayButton
+                isFollowedBy: false,
             }
         },
         computed: {
@@ -67,35 +38,54 @@
                     ? 'フォロー中'
                     : 'フォロー'
             },
-            buttonShow() {
-                return this.isSameUser
-                    ? 'd-block'
-                    : 'd-none'
+            hideFollowButton() {
+                return parseInt(this.id) === this.$store.getters['auth/userId']
+                    ? 'hide-button'
+                    : ''
             }
         },
         methods: {
-            clickFollow() {
-                if (!this.authorized) {
-                    alert('フォロー機能はログイン中のみ使用できます')
-                    return
+            async initialFollowedBy() {
+                const response = await axios.get(`/api/followCheck/${this.id}`)
+
+                if (response.data >= 1) {
+                    this.isFollowedBy = true
+                } else {
+                    this.isFollowedBy = false
                 }
 
+            },
+            clickFollow() {
                 this.isFollowedBy
                     ? this.unfollow()
                     : this.follow()
             },
             async follow() {
-                const response = await axios.put(this.endpoint)
+                const response = await axios.put(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = true
-                this.followersCounts = response.data
+                this.$store.commit('follow/setFollowersCounts', response.data)
             },
             async unfollow() {
-                const response = await axios.delete(this.endpoint)
+                const response = await axios.delete(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = false
-                this.followersCounts = response.data
+                this.$store.commit('follow/setFollowersCounts', response.data)
             },
         },
+        watch: {
+            $route: {
+                async handler () {
+                    await this.initialFollowedBy()
+                },
+                immediate: true
+            }
+        }
     }
 </script>
+
+<style>
+    .hide-button {
+        display: none;
+    }
+</style>

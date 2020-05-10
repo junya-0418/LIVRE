@@ -14,7 +14,7 @@ class BookController extends Controller
 {
     public function __construct(BookRepositoryInterface $book_repository)
     {
-        $this->middleware('auth')->except(['index', 'search', 'show']);
+        $this->middleware('auth')->except(['index', 'search', 'show', 'wantCheck']);
         $this->book_repository = $book_repository;
     }
 
@@ -92,5 +92,37 @@ class BookController extends Controller
 
         return redirect()->route('users.show', ['id' => $user_id]);
 
+    }
+
+    public function wantCheck($id) {
+
+        $mybook = Mybook::find($id);
+
+        $check = $mybook->isWantedBy(Auth::user());
+
+        $counts = $mybook->count_wants;
+
+        return ['check' => $check, 'counts' => $counts];
+
+
+    }
+
+    public function want(Request $request, $id)
+    {
+        $book = Mybook::where('id', $id)->first();
+
+        $book->wants()->detach($request->user()->id);
+        $book->wants()->attach($request->user()->id);
+
+        return $book->wants()->count();
+    }
+
+    public function unwant(Request $request, $id)
+    {
+        $book = Mybook::where('id', $id)->first();
+
+        $book->wants()->detach($request->user()->id);
+
+        return $book->wants()->count();
     }
 }
