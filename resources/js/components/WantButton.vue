@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import {UNAUTHORIZED} from "../util";
+    import {SESSION_EXPIRED, UNAUTHORIZED} from "../util";
 
     export default {
         props: {
@@ -60,6 +60,14 @@
             },
             async want() {
                 const response = await axios.put(`/api/want/${this.id}`)
+
+                if (response.status === SESSION_EXPIRED) {
+                    this.$store.commit('message/setContent', {
+                        content: 'セッションの有効期限が切れています\n画面のリロードを行ってください',
+                        timeout: 8000
+                    })
+                    return false
+                }
 
                 if (response.status === UNAUTHORIZED) {
                     this.$store.commit('message/setContent', {
