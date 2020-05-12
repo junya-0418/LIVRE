@@ -5,15 +5,25 @@
                 <i class="fas fa-book-open mr-2"></i>
                 {{ buttonText }}
             </button>
-            <div class="wants-counts text-light ml-2 mt-1">
+            <div class="wants-counts text-light ml-2 mt-1" @click="openModal">
                 {{ wantsCounts }}
             </div>
         </div>
+
+        <Modal v-show="showContent"
+               @close-modal="closeModal"
+               title="読みたい！したユーザー"
+               :items="items"
+        >
+
+        </Modal>
+
     </div>
 </template>
 
 <script>
     import {SESSION_EXPIRED, UNAUTHORIZED} from "../util";
+    import Modal from "./Modal";
 
     export default {
         props: {
@@ -22,10 +32,15 @@
                 required: true
             }
         },
+        components: {
+            Modal
+        },
         data() {
             return {
                 isWantedBy: false,
                 wantsCounts: '',
+                showContent: false,
+                items: []
             }
         },
         computed: {
@@ -51,6 +66,7 @@
                 }
 
                 this.wantsCounts = response.data.counts
+                this.items = response.data.want_users[0].wants
 
             },
             clickWant() {
@@ -78,7 +94,8 @@
                 }
 
                 this.isWantedBy = true
-                this.wantsCounts = response.data
+                this.wantsCounts = response.data.counts
+                this.items = response.data.want_users[0].wants
             },
             async unwant() {
                 const response = await axios.delete(`/api/want/${this.id}`)
@@ -92,7 +109,14 @@
                 }
 
                 this.isWantedBy = false
-                this.wantsCounts = response.data
+                this.wantsCounts = response.data.counts
+                this.items = response.data.want_users[0].wants
+            },
+            openModal() {
+                this.showContent = true
+            },
+            closeModal() {
+                this.showContent = false
             },
         },
         watch: {
@@ -109,5 +133,10 @@
 <style>
     .hide-button {
         display: none;
+    }
+
+    .wants-counts:hover {
+        cursor: pointer;
+        text-decoration: underline;
     }
 </style>

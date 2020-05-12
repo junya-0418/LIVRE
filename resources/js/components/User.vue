@@ -11,13 +11,13 @@
 
     <div class="follow-area" style="display: flex;">
         <div class="card-text" style="width: 600px;">
-            <div style="position: absolute; margin-left: 70px;">
-                <a href="" class="text-light">
-                    {{ followingsCounts }} フォロー
-                </a>
-                <a href="" class="text-light">
-                    {{ followersCounts }} フォロワー
-                </a>
+            <div style="position: absolute; margin-left: 70px; display: flex;">
+                <div class="text-light follow-text" @click="openModal('followee')">
+                    <strong>{{ followingsCounts }}</strong><span style="opacity: 0.7;"> フォロー</span>
+                </div>
+                <div href="" class="text-light ml-2 follow-text" @click="openModal('follower')">
+                    <strong>{{ followersCounts }}</strong><span style="opacity: 0.7;"> フォロワー</span>
+                </div>
             </div>
         </div>
 
@@ -27,6 +27,14 @@
             </follow-button>
         </div>
     </div>
+
+    <Modal v-show="showContent"
+           @close-modal="closeModal"
+           :title="title"
+           :items="items"
+    >
+
+    </Modal>
 
     <div style="padding-top: 50px;">
         <div style="text-align: -webkit-center;">
@@ -51,6 +59,7 @@
 <script>
     import Pagination from '../components/Pagination.vue'
     import FollowButton from "../components/FollowButton.vue";
+    import Modal from "./Modal";
     import { mapState } from 'vuex'
 
     export default {
@@ -67,19 +76,27 @@
         },
         components: {
             Pagination,
-            FollowButton
+            FollowButton,
+            Modal
         },
         data() {
             return {
                 bookLists : [],
                 uri: '/user/' + this.id,
                 username: '',
+                showContent: false,
+                items: [],
+                title: ''
             }
         },
         computed: {
             ...mapState({
-                followingsCounts: state => state.follow.followingsCounts,
-                followersCounts: state => state.follow.followersCounts,
+                followingsCounts () {
+                    return this.$store.getters['follow/followingsCounts']
+                },
+                followersCounts () {
+                    return this.$store.getters['follow/followersCounts']
+                },
                 currentPage: state => state.book.currentPage,
                 lastPage: state => state.book.lastPage,
             })
@@ -96,16 +113,31 @@
 
                 this.bookLists = response.data.mybooks.data
                 this.username = response.data.username
-                this.$store.commit('follow/setFollowingsCounts', response.data.followingsCounts)
-                this.$store.commit('follow/setFollowersCounts', response.data.followersCounts)
+                this.$store.commit('follow/setFollowings', response.data.followings)
+                this.$store.commit('follow/setFollowers', response.data.followers)
                 this.$store.commit('book/setCurrentPage', response.data.mybooks.current_page)
                 this.$store.commit('book/setLastPage', response.data.mybooks.last_page)
+            },
+            openModal(data) {
+                this.showContent = true
+                if (data === 'followee') {
+                    this.title = 'フォロー中'
+                    this.items = this.$store.state.follow.followings
+                } else {
+                    this.title = 'フォロワー'
+                    this.items = this.$store.state.follow.followers
+                }
+
+            },
+            closeModal() {
+                this.showContent = false
             },
         },
         watch: {
             $route: {
                 async handler () {
                     await this.fetchMyBooks()
+                    this.showContent = false
                 },
                 immediate: true
             }
@@ -130,6 +162,11 @@
 
     .follow-area {
         margin-top: 20px;
+    }
+
+    .follow-text:hover {
+        cursor: pointer;
+        text-decoration: underline;
     }
 
 </style>

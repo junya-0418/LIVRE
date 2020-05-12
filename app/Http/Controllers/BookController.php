@@ -102,7 +102,9 @@ class BookController extends Controller
 
         $counts = $mybook->count_wants;
 
-        return ['check' => $check, 'counts' => $counts];
+        $want_users = Mybook::where('id', $id)->with(['wants'])->get();
+
+        return ['check' => $check, 'counts' => $counts, 'want_users' => $want_users];
 
 
     }
@@ -114,7 +116,10 @@ class BookController extends Controller
         $book->wants()->detach($request->user()->id);
         $book->wants()->attach($request->user()->id);
 
-        return $book->wants()->count();
+        $counts = $book->wants()->count();
+        $want_users = Mybook::where('id', $id)->with(['wants'])->get();
+
+        return ['counts' => $counts, 'want_users' => $want_users];
     }
 
     public function unwant(Request $request, $id)
@@ -123,6 +128,9 @@ class BookController extends Controller
 
         $book->wants()->detach($request->user()->id);
 
-        return $book->wants()->count();
+        $counts = $book->wants()->count();
+        $want_users = Mybook::where('id', $id)->with(['wants'])->get();
+
+        return ['counts' => $counts, 'want_users' => $want_users];
     }
 }

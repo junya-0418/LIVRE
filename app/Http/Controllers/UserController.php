@@ -22,10 +22,10 @@ class UserController extends Controller
 
         $myBooks = $this->user_repository->getMyBooks($user->id);
 
-        $followingsCounts = $user->followings()->get()->count();
-        $followersCounts = $user->followers()->get()->count();
+        $followings = $user->followings()->get();
+        $followers = $user->followers()->get();
 
-        return ['mybooks' => $myBooks, 'username' => $user->name, 'followingsCounts' => $followingsCounts, 'followersCounts' => $followersCounts];
+        return ['mybooks' => $myBooks, 'username' => $user->name, 'followings' => $followings, 'followers' => $followers];
 
     }
 
@@ -49,7 +49,7 @@ class UserController extends Controller
         $request->user()->followings()->detach($user);
         $request->user()->followings()->attach($user);
 
-        return $user->followers()->get()->count();
+        return $user->followers()->get();
     }
 
     public function unfollow(Request $request, $id)
@@ -63,6 +63,6 @@ class UserController extends Controller
 
         $request->user()->followings()->detach($user);
 
-        return $user->followers()->get()->count();
+        return $user->followers()->get();
     }
 }

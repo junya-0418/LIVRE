@@ -1,18 +1,19 @@
 const state = {
-    followingsCounts: '',
-    followersCounts: ''
+    followings: '',
+    followers: ''
 }
 
 const getters = {
-
+    followingsCounts: state => state.followings.length,
+    followersCounts: state => state.followers.length
 }
 
 const mutations = {
-    setFollowingsCounts (state, counts) {
-        state.followingsCounts = counts
+    setFollowings (state, followings) {
+        state.followings = followings
     },
-    setFollowersCounts (state, counts) {
-        state.followersCounts = counts
+    setFollowers (state, followers) {
+        state.followers = followers
     }
 }
 

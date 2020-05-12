@@ -13,7 +13,6 @@
     export default {
         props: {
             id: {
-                type: String,
                 required: true
             }
         },
@@ -72,7 +71,7 @@
                 const response = await axios.put(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = true
-                this.$store.commit('follow/setFollowersCounts', response.data)
+                this.$store.commit('follow/setFollowers', response.data)
             },
             async unfollow() {
                 if (this.$store.getters['auth/check'] === false) {
@@ -85,7 +84,7 @@
                 const response = await axios.delete(`/api/follow/${this.id}`)
 
                 this.isFollowedBy = false
-                this.$store.commit('follow/setFollowersCounts', response.data)
+                this.$store.commit('follow/setFollowers', response.data)
             },
         },
         watch: {
