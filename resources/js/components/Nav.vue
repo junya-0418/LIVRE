@@ -22,7 +22,6 @@
                                 <a form="logout-button" href="javascript:void(0);" @click="logout" class="nav-link p-0 pl-2">
                                     ログアウト
                                 </a>
-<!--                                <button class="button button&#45;&#45;link" @click="logout">Logout</button>-->
                             </div>
                         </div>
 

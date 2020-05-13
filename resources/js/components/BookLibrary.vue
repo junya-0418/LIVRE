@@ -6,11 +6,14 @@
             <div class="mt-3 new-books-card" v-for="book in books">
                 <div class="d-flex flex-row">
                     <div class="font-weight-lighter">
-                        <div>
                             <RouterLink class="book_overlay" :to="`/books/${book.id}`">
-                                <img class="card-img library-img-size" :src="book.imageLinks" />
+                                <div class="book-item">
+                                    <img class="card-img library-img-size" :src="book.imageLinks" />
+                                    <div class="mask">
+                                    　<div class="caption">test</div>
+                                　   </div>
+                                </div>
                             </RouterLink>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -21,30 +24,24 @@
 </template>
 
 <style>
-    #overlay{
-        /*　要素を重ねた時の順番　*/
-        z-index:1;
-
-        /*　画面全体を覆う設定　*/
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background-color:rgba(0,0,0,0.5);
-
-        /*　画面の中央に要素を表示させる設定　*/
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
+    .book-item {
+        position: relative;
     }
-
-    #content{
-        z-index:2;
-        width:50%;
-        padding: 1em;
-        background:#fff;
+    .book-item .caption {
+        color: #fff;
+    }
+    .book-item .mask {
+        width:			100%;
+        height:			100%;
+        position: absolute;
+        opacity: 0;
+        overflow: hidden;
+    }
+    .book-item:hover {
+        opacity: 0.8;
+    }
+    .book-item:hover .mask {
+        opacity: 1;
     }
 </style>
 

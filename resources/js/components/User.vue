@@ -41,7 +41,7 @@
             <div class="mt-3 new-books-card" v-for="book in bookLists">
                 <div class="d-flex flex-row">
                     <div class="font-weight-lighter">
-                        <div>
+                        <div class="book-item">
                             <RouterLink class="book_overlay" :to="`/books/${book.id}`">
                                 <img class="card-img library-img-size" :src="book.imageLinks" />
                             </RouterLink>
@@ -136,8 +136,8 @@
         watch: {
             $route: {
                 async handler () {
-                    await this.fetchMyBooks()
                     this.showContent = false
+                    await this.fetchMyBooks()
                 },
                 immediate: true
             }
