@@ -10,7 +10,7 @@
                                 <div class="book-item">
                                     <img class="card-img library-img-size" :src="book.imageLinks" />
                                     <div class="mask">
-                                    　<div class="caption">test</div>
+                                    　<div class="caption">{{ book.owner.name }}</div>
                                 　   </div>
                                 </div>
                             </RouterLink>
@@ -29,6 +29,7 @@
     }
     .book-item .caption {
         color: #fff;
+        font-size: 14px;
     }
     .book-item .mask {
         width:			100%;
