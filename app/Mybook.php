@@ -37,4 +37,9 @@ class Mybook extends Model
     public function getCountWantsAttribute(): int {
         return $this->wants()->count();
     }
+
+    public function comment()
+    {
+        return $this->hasOne('App\Comment');
+    }
 }

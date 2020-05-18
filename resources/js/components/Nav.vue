@@ -18,8 +18,8 @@
 
                         <div v-if="isLogin">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ username }}</a>
-                            <div class="dropdown-menu">
-                                <a form="logout-button" href="javascript:void(0);" @click="logout" class="nav-link p-0 pl-2">
+                            <div class="dropdown-menu p-0" style="border: solid 1px #ccc;">
+                                <a form="logout-button" href="javascript:void(0);" @click="logout" class="nav-link pl-2 text-light bg-dark">
                                     ログアウト
                                 </a>
                             </div>

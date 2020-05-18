@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Mybook;
 use BookService;
 use App\Repositories\Book\BookRepositoryInterface;
+use App\Comment;
+use App\Http\Requests\StoreComment;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -30,7 +32,7 @@ class BookController extends Controller
 
     public function show($id) {
 
-        $book = Mybook::where('id', $id)->with(['owner'])->first();
+        $book = Mybook::where('id', $id)->with(['owner', 'comment'])->first();
 
         return $book ?? abort(404);
 
@@ -68,20 +70,6 @@ class BookController extends Controller
 
     }
 
-    public function update(Mybook $mybook, $id) {
-
-        $mybook = Mybook::find($id);
-
-        $mybook->reading_status = 1;
-
-        $mybook->update();
-
-        $user_id = Auth::user()->id;
-
-        return redirect()->route('users.show', ['id' => $user_id]);
-
-    }
-
     public function delete($id) {
 
         $mybook = Mybook::find($id);
@@ -90,7 +78,7 @@ class BookController extends Controller
 
         $user_id = Auth::user()->id;
 
-        return redirect()->route('users.show', ['id' => $user_id]);
+        return $user_id;
 
     }
 
@@ -132,5 +120,15 @@ class BookController extends Controller
         $want_users = Mybook::where('id', $id)->with(['wants'])->get();
 
         return ['counts' => $counts, 'want_users' => $want_users];
+    }
+
+    public function addComment($id, StoreComment $request) {
+
+        $comment = Comment::updateOrCreate(
+          ['mybook_id' => $id] ,
+          ['content' => $request->get('content')]
+        );
+
+        return response($comment, 201);
     }
 }
