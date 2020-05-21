@@ -7,7 +7,7 @@
                 <div>
                     <img class="search-book-imgSize" v-bind:src="bookinformation.volumeInfo.imageLinks.thumbnail" />
                     <input type="hidden" v-bind:id="'imageLinks' + index" v-bind:value="bookinformation.volumeInfo.imageLinks.thumbnail">
-                    <button class="btn btn-link　btn-sm" type="button" data-toggle="collapse" v-bind:data-target="'#collapse' + index"
+                    <button class="btn btn-link　btn-sm text-light" type="button" data-toggle="collapse" v-bind:data-target="'#collapse' + index"
                             aria-expanded="true" aria-controls="collapseOne">
                         詳細を見る
                     </button>
@@ -15,24 +15,24 @@
                 </div>
 
                 <div v-bind:id="'collapse' + index" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="search-book-title">
+                    <div class="search-book-title text-light">
                         <div>{{ bookinformation.volumeInfo.title }}</div>
                         <input type="hidden" v-bind:id="'title' + index" v-bind:value="bookinformation.volumeInfo.title">
                     </div>
 
-                    <div class="search-book-author">
+                    <div class="search-book-author text-light">
                         <div v-for="author in bookinformation.volumeInfo.authors">
                             <div>{{ author }}</div>
                             <input type="hidden" v-bind:id="'authors' + index" v-bind:value="bookinformation.volumeInfo.authors">
                         </div>
                     </div>
 
-                    <div class="search-book-publisher">
+                    <div class="search-book-publisher text-light">
                         <div>{{ bookinformation.volumeInfo.publisher }}</div>
                         <input type="hidden" v-bind:id="'publisher' + index" v-bind:value="bookinformation.volumeInfo.publisher">
                     </div>
 
-                    <div class="search-book-description">
+                    <div class="search-book-description text-light">
                         <div>{{ bookinformation.volumeInfo.description }}</div>
                         <input type="hidden" v-bind:id="'description' + index" v-bind:value="bookinformation.volumeInfo.description">
                     </div>

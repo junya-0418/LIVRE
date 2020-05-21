@@ -19,8 +19,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     </head>
 
-    <body style="margin-left: 300px !important;">
-
+    <body>
         <div id="app" style="height: 100% !important;">
         </div>
 
@@ -35,3 +34,5 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
     </body>
 </html>
+
+

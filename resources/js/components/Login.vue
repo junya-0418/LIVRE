@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container--small" style="padding-top: 50px;">
+        <div class="container--small login-main">
             <ul class="tab text-light" style="display: flex; justify-content: center;">
                 <li class="tab__item mr-5" :class="{'tab__item--active': tab === 1 }" @click="tab = 1">ログイン</li>
                 <li class="tab__item mr-5" :class="{'tab__item--active': tab === 2 }" @click="tab = 2">会員登録</li>
@@ -168,6 +168,18 @@
 
     .tab__item--active {
         border-bottom: solid 3px #0C9A9A;
+    }
+
+    @media (min-width: 980px) {
+        .login-main {
+            padding-top: 50px;
+        }
+    }
+
+    @media (max-width: 479px) {
+        .login-main {
+            padding-top: 90px;
+        }
     }
 
 </style>

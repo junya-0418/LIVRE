@@ -68,25 +68,52 @@
 
     }
 
-    #content{
-        z-index:3;
-        width:50%;
-        padding: 1em;
-        background: black;
+    @media (min-width: 980px) {
+        #content{
+            z-index:3;
+            width:50%;
+            padding: 1em;
+            background: black;
+        }
+
+        .modal-title {
+            border-bottom: solid 1px #fff;
+        }
+
+        .modal-card {
+            border-bottom: solid 1px #fff;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .modal-item:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 
-    .modal-title {
-        border-bottom: solid 1px #fff;
+    @media (max-width: 479px) {
+        #content{
+            z-index:3;
+            width:90%;
+            padding: 1em;
+            background: black;
+        }
+
+        .modal-title {
+            border-bottom: solid 1px #fff;
+        }
+
+        .modal-card {
+            border-bottom: solid 1px #fff;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .modal-item:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 
-    .modal-card {
-        border-bottom: solid 1px #fff;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-
-    .modal-item:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
 </style>

@@ -9,9 +9,9 @@
         </h2>
     </div>
 
-    <div class="follow-area" style="display: flex;">
-        <div class="card-text" style="width: 600px;">
-            <div style="position: absolute; margin-left: 70px; display: flex;">
+    <div class="follow-area">
+        <div class="card-text">
+            <div class="follow-counts">
                 <div class="text-light follow-text" @click="openModal('followee')">
                     <strong>{{ followingsCounts }}</strong><span style="opacity: 0.7;"> フォロー</span>
                 </div>
@@ -36,7 +36,13 @@
 
     </Modal>
 
-    <div style="padding-top: 50px;">
+    <div :class="{'loading': loading}" style="text-align: center;">
+        <div v-if="loading" class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="users-books">
         <div style="text-align: -webkit-center;">
             <div class="mt-3 new-books-card" v-for="book in bookLists">
                 <div class="d-flex flex-row">
@@ -49,7 +55,9 @@
                     </div>
                 </div>
             </div>
-            <Pagination :uri="uri" :current-page="currentPage" :last-page="lastPage" />
+            <div v-if="!loading">
+                <Pagination :uri="uri" :current-page="currentPage" :last-page="lastPage" />
+            </div>
         </div>
     </div>
 
@@ -86,7 +94,8 @@
                 username: '',
                 showContent: false,
                 items: [],
-                title: ''
+                title: '',
+                loading: false
             }
         },
         computed: {
@@ -104,6 +113,8 @@
         methods: {
             async fetchMyBooks() {
 
+                this.loading = true
+
                 const response = await axios.get(`/api/user/${this.id}`,
                     {
                         params: {
@@ -117,6 +128,8 @@
                 this.$store.commit('follow/setFollowers', response.data.followers)
                 this.$store.commit('book/setCurrentPage', response.data.mybooks.current_page)
                 this.$store.commit('book/setLastPage', response.data.mybooks.last_page)
+
+                this.loading = false
             },
             openModal(data) {
                 this.showContent = true
@@ -147,27 +160,71 @@
 </script>
 
 <style>
+    @media (min-width: 980px) {
+        .user-main {
+            margin-top: 50px;
+            width: 600px;
+            color: #CCCCCC;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .user-main {
-        margin-top: 50px;
-        width: 600px;
-        color: #CCCCCC;
-        margin-left: auto;
-        margin-right: auto;
+        .user-name {
+            padding-top: 9px;
+        }
+
+        .follow-area {
+            margin-top: 20px;
+            display: flex;
+            width: 600px;
+        }
+
+        .follow-counts {
+            position: absolute;
+            margin-left: 70px;
+            display: flex;
+        }
+
+        .follow-text:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .users-books {
+            padding-top: 50px;
+        }
     }
 
-    .user-name {
-        padding-top: 9px;
+    @media (max-width: 479px) {
+        .user-main {
+            margin-top: 90px;
+            color: #CCCCCC;
+            margin-left: 70px;
+        }
+
+        .user-name {
+            padding-top: 9px;
+        }
+
+        .follow-area {
+            margin-top: 20px;
+        }
+
+        .follow-counts {
+            margin-left: 70px;
+            display: flex;
+        }
+
+        .follow-text:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .users-books {
+            padding-top: 30px;
+        }
     }
 
-    .follow-area {
-        margin-top: 20px;
-    }
-
-    .follow-text:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
 
 </style>
 

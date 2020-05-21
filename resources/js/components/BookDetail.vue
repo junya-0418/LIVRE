@@ -73,7 +73,10 @@
                                 </ul>
                             </div>
                             <div class="basic-textarea rounded-corners">
-                                <textarea v-model="commentContent" class="form-control z-depth-1" id="exampleFormControlTextarea345" rows="3" placeholder="Write your comment..." style="height: 150px !important;"> {{ commentContent }}</textarea>
+                                <textarea v-model="commentContent" class="form-control z-depth-1" rows="3" placeholder="Write your comment..." style="height: 150px !important;">
+                                    {{ commentContent }}
+                                </textarea>
+                                <p class="mt-2" style="float: right;">{{ commentContent.length }}/140</p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -184,28 +187,56 @@
 </script>
 
 <style>
-    .book-detail-main {
-        display: flex;
-        width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 100px;
-        justify-content: center;
+    @media (min-width: 980px) {
+        .book-detail-main {
+            display: flex;
+            width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+            justify-content: center;
+        }
+
+        .book-detail-description {
+            font-size: 14px;
+            display: contents;
+        }
+
+        .book-detail-img_size {
+            max-height: 144px;
+            width: 90% !important;
+            padding-right: 70px;
+        }
+
+        .book-detail-username:hover {
+            text-decoration: underline;
+        }
     }
 
-    .book-detail-description {
-        font-size: 14px;
-        display: contents;
+    @media (max-width: 479px) {
+        .book-detail-main {
+            display: flex;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 100px;
+            justify-content: center;
+        }
+
+        .book-detail-description {
+            font-size: 14px;
+            display: contents;
+        }
+
+        .book-detail-img_size {
+            max-height: 144px;
+            width: 90% !important;
+        }
+
+        .book-detail-username:hover {
+            text-decoration: underline;
+        }
     }
 
-    .book-detail-img_size {
-        max-height: 144px;
-        width: 90% !important;
-        padding-right: 70px;
-    }
-
-    .book-detail-username:hover {
-        text-decoration: underline;
-    }
 
 </style>

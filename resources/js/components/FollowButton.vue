@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="float: right;" :class="hideFollowButton">
+        <div class="follow-button" :class="hideFollowButton">
             <button class="btn-sm shadow-none border border-primary p-2" :class="buttonColor" @click="clickFollow">
                 <i class="mr-1" :class="buttonIcon"></i>
                 {{ buttonText }}
@@ -101,5 +101,18 @@
 <style>
     .hide-button {
         display: none;
+    }
+
+    @media (min-width: 980px) {
+        .follow-button {
+            float: right;
+        }
+    }
+
+    @media (max-width: 479px) {
+        .follow-button {
+            margin-left: 70px;
+            margin-top: 15px;
+        }
     }
 </style>
