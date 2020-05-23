@@ -13,8 +13,4 @@
 
 //Auth::routes();
 
-Route::patch('/update/{id}', 'BookController@update')->name('update');
-
-Route::delete('/delete/{id}', 'BookController@delete')->name('delete');
-
 Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
