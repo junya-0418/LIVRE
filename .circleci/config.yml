@@ -3,11 +3,24 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+      - image: circleci/mysql:5.7
+
+    environment:
+      - APP_DEBUG: true
+      - APP_ENV: testing
+      - APP_KEY: base64:TNuq5Aa6408CImBuYTi8u6Li93vGLEQAo6MhAgiHrR8=
+      - DB_CONNECTION: circle_test
+      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+    working_directory: ~/repo
+
     steps:
       - checkout
+      - run: sudo docker-php-ext-install pdo_mysql
       - run: composer install -n --prefer-dist
       - run: npm ci
       - run: npm run dev
+      - run: php artisan migrate
       - run:
           name: php test
           command: vendor/bin/phpunit
