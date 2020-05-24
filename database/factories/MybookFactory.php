@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 $factory->define(App\Mybook::class, function (Faker $faker) {
     return [
-        'id' => Str::random(12),
         'user_id' => fn() => factory(App\User::class)->create()->id,
         'book_id' => Str::random(12),
         'title' => 'test',

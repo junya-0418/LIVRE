@@ -13,4 +13,4 @@
 
 //Auth::routes();
 
-Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
+Route::get('/{any?}', fn() => view('index'))->where('any', '.+')->name('top');

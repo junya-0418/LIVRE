@@ -43,7 +43,7 @@ Route::delete('/want/{id}', 'BookController@unwant')->name('unwant');
 
 Route::delete('/delete/{id}', 'BookController@delete')->name('delete');
 
-Route::get('/books', 'BookController@index')->name('books');
+Route::get('/books', 'BookController@index')->name('index');
 
 Route::get('/books/{id}', 'BookController@show')->name('book.show');
 

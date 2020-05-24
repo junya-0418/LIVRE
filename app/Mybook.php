@@ -16,6 +16,10 @@ class Mybook extends Model
         'description',
     ];
 
+    protected $visible = [
+        'id', 'owner', 'user_id', 'title', 'imageLinks', 'author1', 'publisher', 'description',
+    ];
+
     public function owner() {
 
         return $this->belongsTo('App\User', 'user_id', 'id', 'users');
