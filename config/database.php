@@ -35,6 +35,12 @@ return [
 
     'connections' => [
 
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ],
+
         'testing' => [
            'driver'   => 'sqlite',
           'database' => ':memory:', // SQLiteのインメモリ機能を使用
