@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 $factory->define(App\Mybook::class, function (Faker $faker) {
     return [
-        'user_id' => fn() => factory(App\User::class)->create()->id,
+        'user_id' => function() { return factory(App\User::class);},
         'book_id' => Str::random(12),
         'title' => 'test',
         'imageLinks' => 'http://books.google.com/books/content?id=test',
