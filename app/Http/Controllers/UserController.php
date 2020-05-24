@@ -29,6 +29,12 @@ class UserController extends Controller
 
     }
 
+    public function userCheck() {
+
+        return Auth::user();
+
+    }
+
     public function followCheck($id) {
 
         $user = User::where('id', $id)->first();
