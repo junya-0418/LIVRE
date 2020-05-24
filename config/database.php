@@ -35,22 +35,6 @@ return [
 
     'connections' => [
 
-        'sqlite_testing' => [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ],
-
-        'testing' => [
-           'driver'   => 'sqlite',
-          'database' => ':memory:', // SQLiteのインメモリ機能を使用
-          'prefix'   => '',
-           'options'  => [
-               // テストデータの永続化
-               PDO::ATTR_PERSISTENT => false,
-           ],
-       ],
-
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
