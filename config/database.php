@@ -35,15 +35,19 @@ return [
 
     'connections' => [
 
-        'testing' => [
-           'driver'   => 'sqlite',
-          'database' => ':memory:', // SQLiteのインメモリ機能を使用
-          'prefix'   => '',
-           'options'  => [
-               // テストデータの永続化
-               PDO::ATTR_PERSISTENT => false,
-           ],
-       ],
+        'circle_test' => [
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'circle_test',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',

@@ -25,7 +25,7 @@ Route::post('/store', 'BookController@store')->name('store');
 
 Route::post('/book/{id}/comment', 'BookController@addComment')->name('comment');
 
-Route::get('/userCheck', fn() => Auth::user())->name('userCheck');
+Route::get('/userCheck', 'UserController@userCheck')->name('userCheck');
 
 Route::get('/followCheck/{id}', 'UserController@followCheck')->name('followCheck');
 

@@ -175,8 +175,8 @@
 
         .follow-area {
             margin-top: 20px;
-            display: flex;
-            width: 600px;
+            display: inline-block;
+            width: 700px;
         }
 
         .follow-counts {
