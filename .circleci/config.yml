@@ -16,8 +16,14 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
       - run: sudo docker-php-ext-install pdo_mysql
       - run: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
       - run: npm ci
       - run: npm run dev
       - run: php artisan migrate
