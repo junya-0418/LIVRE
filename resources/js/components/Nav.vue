@@ -15,7 +15,7 @@
                     </li>
                     <li class="nav-item" v-if="isLogin">
                         <RouterLink class="navbar__brand text-light" :to="`/user/${userId}`">
-                            マイページ
+                            マイライブラリ
                         </RouterLink>
                     </li>
                     <li class="nav-item dropdown" style="position: fixed; bottom: 3rem; color: #fff !important;">
