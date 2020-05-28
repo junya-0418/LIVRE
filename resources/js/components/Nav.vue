@@ -68,7 +68,7 @@
                         </li>
                         <li class="nav-item mt-3" v-if="isLogin">
                             <RouterLink class="navbar__brand text-light" :to="`/user/${userId}`">
-                                マイページ
+                                マイライブラリ
                             </RouterLink>
                         </li>
                         <li class="nav-item dropdown mt-3" style="position: fixed; bottom: 20px;">
