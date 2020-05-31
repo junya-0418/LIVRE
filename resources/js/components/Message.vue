@@ -1,8 +1,22 @@
 <template>
-    <div style="text-align: center;">
-        <div class="message-main">
-            <div class="message text-light" v-show="message">
-                {{ message }}
+    <div>
+        <div class="pc-message">
+            <div style="text-align: center;">
+                <div class="message-main">
+                    <div class="message text-light" v-show="message">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sp-message">
+            <div>
+                <div class="message-main">
+                    <div class="message text-light" v-show="message">
+                         {{ message }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -23,6 +37,10 @@
 <style scoped>
 
     @media (min-width: 980px) {
+        .sp-message {
+            display: none;
+        }
+
         .message-main {
             background-color: black;
             display: inline-flex;
@@ -40,13 +58,19 @@
     }
 
     @media (max-width: 479px) {
+        .pc-message {
+            display: none;
+        }
+
         .message-main {
             background-color: black;
             display: inline-flex;
         }
 
         .message {
-            width: 300px;
+            position: absolute;
+            z-index: 5;
+            margin-top: 80px;
             margin-left: auto;
             margin-right: auto;
             padding-left: 20px;

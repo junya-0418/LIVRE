@@ -51,7 +51,9 @@ class BookController extends Controller
 
         $mybook->book_id = $request->bookId;
         $mybook->title = $request->title;
-        $mybook->imageLinks = $request->imageLinks;
+
+        $imageLinksURL = $request->imageLinks;
+        $mybook->imageLinks = str_replace('http', 'https', $imageLinksURL);
 
         $authors = array($request->authors);
 

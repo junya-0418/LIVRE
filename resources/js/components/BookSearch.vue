@@ -1,6 +1,6 @@
 <template>
     <div class="search-main">
-        <div><i class="fas fa-book-open mr-2"></i>本を探す</div>
+        <div class="text-light"><i class="fas fa-book-open mr-2"></i>本を探す</div>
         <div class="md-form" style="display: flex;">
             <input class="form-control" style="width: 250px; color: antiquewhite;" type="text" name="word" v-model="searchWord"　autocomplete="off" placeholder="キーワード検索">
             <button class="btn btn-outline-info btn-rounded waves-effect btn-sm" type="button" value="送信" @click="search" style="width: 80px;">検索</button>
@@ -68,7 +68,7 @@
 
     @media (max-width: 479px) {
         .search-main {
-            margin-top: 30px;
+            margin-top: 80px;
             padding-left: 20px;
             width: 350px;
         }
