@@ -5,8 +5,8 @@
                 <input type="hidden" v-bind:id="'bookId' + index" v-bind:value="bookinformation.id">
 
                 <div>
-                    <img class="search-book-imgSize" v-bind:src="bookinformation.volumeInfo.imageLinks.thumbnail" />
-                    <input type="hidden" v-bind:id="'imageLinks' + index" v-bind:value="bookinformation.volumeInfo.imageLinks.thumbnail">
+                    <img class="search-book-imgSize" v-bind:src="bookinformation.volumeInfo.imageLinks.thumbnail | changehttps" />
+                    <input type="hidden" v-bind:id="'imageLinks' + index" v-bind:value="bookinformation.volumeInfo.imageLinks.thumbnail | changehttps">
                     <button class="btn btn-link　btn-sm text-light" type="button" data-toggle="collapse" v-bind:data-target="'#collapse' + index"
                             aria-expanded="true" aria-controls="collapseOne">
                         詳細を見る
@@ -52,6 +52,11 @@
             bookinformation: Object,
             index: Number,
         },
+        filters: {
+          changehttps(val) {
+                return val.replace('http', 'https')
+          }
+        },
         data() {
             return {
                 isAddedBy: false,
@@ -61,7 +66,7 @@
                 authors: [],
                 publisher: '',
                 description: '',
-                loading: false
+                loading: false,
             }
         },
         computed: {
