@@ -33,6 +33,8 @@ Route::get('/wantCheck/{id}', 'BookController@wantCheck')->name('wantCheck');
 
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
 
+Route::get('/lists/{id}', 'UserController@lists')->name('user.lists');
+
 Route::put('/follow/{id}', 'UserController@follow')->name('follow');
 
 Route::delete('/follow/{id}', 'UserController@unfollow')->name('unfollow');
