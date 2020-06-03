@@ -29,6 +29,16 @@ class UserController extends Controller
 
     }
 
+    public function lists($id) {
+
+        $user = User::where('id', $id)->first();
+
+        $myBooks = $user->wants()->with(['owner'])->paginate(10);
+
+        return ['mybooks' => $myBooks, 'username' => $user->name];
+
+    }
+
     public function userCheck() {
 
         return Auth::user();

@@ -54,4 +54,9 @@ class User extends Authenticatable
             ? $this->followers->where('id', $user->id)->count()
             : 0;
     }
+
+    public function wants(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Mybook', 'wants', 'user_id', 'mybook_id')->withTimestamps();
+    }
 }

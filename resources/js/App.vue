@@ -1,8 +1,8 @@
 <template>
-    <div class="container pc-main" style="padding: 0; height: 100%; background-color: black;">
+    <div class="pc-main" style="padding: 0; height: 100%; background-color: black;">
         <Nav />
         <main class="col-md-8" style="padding: 0;">
-            <div style="height: 100%; background-color: black; border-right: solid 1px #fff;">
+            <div style="height: 100%; background-color: black;">
                 <Message />
                 <RouterView />
             </div>
@@ -66,6 +66,7 @@
         .pc-main {
             margin-left: 300px;
             display: flex;
+            overflow-y: scroll;
         }
 
         .main {
@@ -84,8 +85,9 @@
             color: #ccc;
             background-color: black;
             padding: 20px;
-            height: 100%;
-            overflow-y: scroll;
+            /*height: 100%;*/
+            /*overflow-y: scroll;*/
+            border-left: solid 1px #fff;
         }
 
         .login-user-name {
