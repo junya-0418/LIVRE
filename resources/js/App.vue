@@ -1,5 +1,5 @@
 <template>
-    <div class="container pc-main" style="padding: 0; height: 100%; background-color: black;">
+    <div class="pc-main" style="padding: 0; height: 100%; background-color: black;">
         <Nav />
         <main class="col-md-8" style="padding: 0;">
             <div style="height: 100%; background-color: black; border-right: solid 1px #fff;">
