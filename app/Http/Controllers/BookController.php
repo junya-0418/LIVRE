@@ -8,6 +8,7 @@ use App\Mybook;
 use BookService;
 use App\Repositories\Book\BookRepositoryInterface;
 use App\Comment;
+use App\User;
 use App\Http\Requests\StoreComment;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,11 +23,28 @@ class BookController extends Controller
 
     public function index(Request $request) {
 
-//        $mybooks = $this->book_repository->getMyBooksFromUserId( Auth::user()->id );
         $books = Mybook::with(['owner'])
             ->orderBy(Mybook::CREATED_AT, 'desc')->paginate(15);
 
         return $books;
+
+    }
+
+    public function followingsBooks($id) {
+
+        $user = User::find($id);
+
+        $followingUserIds = [];
+
+        $following = $user->followings;
+
+        foreach ($following as $follow) {
+            array_push($followingUserIds, $follow->id);
+        }
+
+        $followingsBooks = Mybook::with(['owner'])->whereIn('user_id', $followingUserIds)->orderBy(Mybook::CREATED_AT, 'desc')->paginate(15);
+
+        return $followingsBooks;
 
     }
 

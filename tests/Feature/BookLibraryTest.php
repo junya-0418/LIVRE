@@ -10,8 +10,11 @@ use Tests\TestCase;
 
 class BookLibraryTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
+    /**
+     * @test
+     */
     //トップページ表示テスト
     public function testIndex() {
 
@@ -22,6 +25,9 @@ class BookLibraryTest extends TestCase
 
     }
 
+    /**
+     * @test
+     */
     //トップページの本データの取得テスト
     public function testGetBooksData()
     {

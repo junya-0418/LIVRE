@@ -3,7 +3,7 @@
         <div class="pc-nav">
         <nav class="navbar navbar-expand-md navbar-dark navbar-fixed-left" style="background-color: black;">
             <RouterLink class="navbar-brand pl-2" to="/">
-                <i class="far fa-sticky-note mr-1"></i>
+<!--                <i class="far fa-sticky-note mr-1"></i>-->
                 LIVRE
             </RouterLink>
             <div class="collapse navbar-collapse mt-4">
@@ -16,11 +16,6 @@
                     <li class="nav-item mb-3" v-if="isLogin">
                         <RouterLink class="navbar__brand text-light" :to="`/user/${userId}`">
                             マイライブラリ
-                        </RouterLink>
-                    </li>
-                    <li class="nav-item mb-3" v-if="isLogin">
-                        <RouterLink class="navbar__brand text-light" :to="`/lists/${userId}`">
-                            読みたい
                         </RouterLink>
                     </li>
                     <li class="nav-item dropdown" style="position: fixed; bottom: 3rem; color: #fff !important;">
@@ -74,11 +69,6 @@
                         <li class="nav-item mt-3" v-if="isLogin">
                             <RouterLink class="navbar__brand text-light" :to="`/user/${userId}`">
                                 マイライブラリ
-                            </RouterLink>
-                        </li>
-                        <li class="nav-item mt-3" v-if="isLogin">
-                            <RouterLink class="navbar__brand text-light" :to="`/lists/${userId}`">
-                                読みたい
                             </RouterLink>
                         </li>
                         <li class="nav-item dropdown mt-3" style="position: fixed; bottom: 20px;">

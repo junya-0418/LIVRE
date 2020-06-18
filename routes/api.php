@@ -47,6 +47,8 @@ Route::delete('/delete/{id}', 'BookController@delete')->name('delete');
 
 Route::get('/books', 'BookController@index')->name('index');
 
+Route::get('/followingsBooks/{id}', 'BookController@followingsBooks')->name('followers');
+
 Route::get('/books/{id}', 'BookController@show')->name('book.show');
 
 

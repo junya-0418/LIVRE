@@ -1,9 +1,9 @@
 <template>
 <div style="display: grid;">
-    <div>
+    <div >
         <select class="user-select custom-select custom-select-sm" @change="changePath()" ref="element">
-            <option value="/">すべてのユーザー</option>
-            <option v-if="isLogin" :value="`/followers/${userId}`">フォロー中のユーザー</option>
+            <option :value="`/followers/${userId}`">フォロー中のユーザーの本</option>
+            <option v-if="isLogin" value="/">すべてのユーザーの本</option>
         </select>
     </div>
 
@@ -60,9 +60,9 @@
         },
         computed: {
             ...mapState({
-                books: state => state.book.books,
-                currentPage: state => state.book.currentPage,
-                lastPage: state => state.book.lastPage,
+                books: state => state.book.followersBooks,
+                currentPage: state => state.book.followersCurrentPage,
+                lastPage: state => state.book.followersLastPage,
                 isLogin () {
                     return this.$store.getters['auth/check']
                 },
@@ -72,9 +72,9 @@
             }),
         },
         methods: {
-            async fetchBooks () {
+            async fetchFollowersBooks () {
                 this.loading = true
-                await this.$store.dispatch('book/fetchBooks', this.page)
+                await this.$store.dispatch('book/fetchFollowersBooks', {page: this.page, id: this.userId})
                 this.loading = false
             },
             changePath() {
@@ -89,7 +89,7 @@
         watch: {
             $route: {
                 async handler () {
-                    await this.fetchBooks()
+                    await this.fetchFollowersBooks()
                 },
                 immediate: true
             }

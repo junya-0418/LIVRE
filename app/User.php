@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -58,5 +59,17 @@ class User extends Authenticatable
     public function wants(): BelongsToMany
     {
         return $this->belongsToMany('App\Mybook', 'wants', 'user_id', 'mybook_id')->withTimestamps();
+    }
+
+    public function followingBooks():  HasManyThrough
+    {
+        return $this->hasManyThrough(
+            'App\Mybook',
+            'App\Follow',
+            'follower_id', // followsテーブルの外部キー
+            'user_id', // bookテーブルの外部キー
+            'id', // userテーブルのローカルキー
+            'followee_id' // followsテーブルのローカルキー
+        )->with(['owner']);
     }
 }

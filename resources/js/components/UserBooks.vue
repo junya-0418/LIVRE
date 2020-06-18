@@ -1,13 +1,8 @@
 <template>
 <div>
-    <div class="lists-user-main" style="display:flex;" v-show="username">
-        <h2 class="h4 card-title ml-2 user-name">
-            {{ username }}さんが読みたい本
-        </h2>
-    </div>
 
-    <div :class="{'loading': loading}" style="text-align: center;">
-        <div v-if="loading" class="spinner-border text-primary" role="status">
+    <div v-if="loading" :class="{'loading': loading}" style="text-align: center;">
+        <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
@@ -20,9 +15,6 @@
                         <div class="book-item">
                             <RouterLink class="book_overlay" :to="`/books/${book.id}`">
                                 <img class="card-img library-img-size" :src="book.imageLinks" />
-                                <div class="mask">
-                                　<div class="caption">{{ book.owner.name }}</div>
-                            　   </div>
                             </RouterLink>
                         </div>
                     </div>
@@ -39,8 +31,6 @@
 
 <script>
     import Pagination from '../components/Pagination.vue'
-    import FollowButton from "../components/FollowButton.vue";
-    import Modal from "./Modal";
     import { mapState } from 'vuex'
 
     export default {
@@ -61,9 +51,11 @@
         data() {
             return {
                 bookLists : [],
-                uri: '/lists/' + this.id,
+                uri: '/user/' + this.id,
                 username: '',
                 showContent: false,
+                items: [],
+                title: '',
                 loading: false
             }
         },
@@ -71,14 +63,17 @@
             ...mapState({
                 currentPage: state => state.book.currentPage,
                 lastPage: state => state.book.lastPage,
+                userId () {
+                    return this.$store.getters['auth/userId']
+                },
             })
         },
         methods: {
-            async fetchLists() {
+            async fetchMyBooks() {
 
                 this.loading = true
 
-                const response = await axios.get(`/api/lists/${this.id}`,
+                const response = await axios.get(`/api/user/${this.id}`,
                     {
                         params: {
                             page: this.page
@@ -87,17 +82,38 @@
 
                 this.bookLists = response.data.mybooks.data
                 this.username = response.data.username
+                this.$store.commit('follow/setFollowings', response.data.followings)
+                this.$store.commit('follow/setFollowers', response.data.followers)
                 this.$store.commit('book/setCurrentPage', response.data.mybooks.current_page)
                 this.$store.commit('book/setLastPage', response.data.mybooks.last_page)
 
                 this.loading = false
             },
+            openModal(data) {
+                this.showContent = true
+                if (data === 'followee') {
+                    this.title = 'フォロー中'
+                    this.items = this.$store.state.follow.followings
+                } else {
+                    this.title = 'フォロワー'
+                    this.items = this.$store.state.follow.followers
+                }
+
+            },
+            changePath() {
+                const element = this.$refs.element
+                this.$router.push(
+                    {
+                        path: element.value
+                    }
+                )
+            }
         },
         watch: {
             $route: {
                 async handler () {
                     this.showContent = false
-                    await this.fetchLists()
+                    await this.fetchMyBooks()
                 },
                 immediate: true
             }
@@ -108,7 +124,7 @@
 
 <style>
     @media (min-width: 980px) {
-        .lists-user-main {
+        .user-main {
             margin-top: 50px;
             width: 600px;
             color: #CCCCCC;
@@ -120,20 +136,51 @@
             padding-top: 9px;
         }
 
+        .follow-area {
+            margin-top: 20px;
+            display: inline-block;
+            width: 700px;
+        }
+
+        .follow-counts {
+            position: absolute;
+            margin-left: 70px;
+            display: flex;
+        }
+
+        .follow-text:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
         .users-books {
             padding-top: 50px;
         }
     }
 
     @media (max-width: 479px) {
-        .lists-user-main {
+        .user-main {
             margin-top: 90px;
             color: #CCCCCC;
-            margin-left: 50px;
+            margin-left: 70px;
         }
 
         .user-name {
             padding-top: 9px;
+        }
+
+        .follow-area {
+            margin-top: 20px;
+        }
+
+        .follow-counts {
+            margin-left: 70px;
+            display: flex;
+        }
+
+        .follow-text:hover {
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .users-books {

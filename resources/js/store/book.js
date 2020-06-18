@@ -3,7 +3,10 @@ import { OK, UNAUTHORIZED } from '../util'
 const state = {
     books: [],
     currentPage: 0,
-    lastPage: 0
+    lastPage: 0,
+    followersBooks: [],
+    followersCurrentPage: 0,
+    followersLastPage: 0
 }
 
 const getters = {
@@ -20,6 +23,15 @@ const mutations = {
     setLastPage (state, lastPage) {
         state.lastPage = lastPage
     },
+    setFollowersBooks (state, books) {
+        state.followersBooks = books
+    },
+    setFollowersCurrentPage (state, currentPage) {
+        state.followersCurrentPage = currentPage
+    },
+    setFollowersLastPage (state, lastPage) {
+        state.followersLastPage = lastPage
+    },
 }
 
 const actions = {
@@ -34,6 +46,19 @@ const actions = {
         context.commit('setBooks', response.data.data)
         context.commit('setCurrentPage', response.data.current_page)
         context.commit('setLastPage', response.data.last_page)
+    },
+
+    async fetchFollowersBooks (context, {page, id}) {
+        const response = await axios.get(`/api/followingsBooks/${id}`,
+            {
+                params: {
+                    // ここにクエリパラメータを指定する
+                    page: page // このようにパラメータを付けるとhttpsになる
+                }
+            })
+        context.commit('setFollowersBooks', response.data.data)
+        context.commit('setFollowersCurrentPage', response.data.current_page)
+        context.commit('setFollowersLastPage', response.data.last_page)
     },
 }
 

@@ -12,7 +12,7 @@ use Tests\TestCase;
 class WantApiTest extends TestCase
 {
 
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function setUp(): void
     {
