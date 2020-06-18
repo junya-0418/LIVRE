@@ -9,7 +9,8 @@ import Login from "./components/Login";
 import SystemError from './errors/System.vue'
 import store from './store'
 import BookSearch from "./components/BookSearch";
-import List from "./components/List";
+import List from "./components/Lists";
+import Followers from "./components/Followers";
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -45,6 +46,14 @@ const routes = [
     {
         path: '/lists/:id',
         component: List,
+        props: route => {
+            const page = route.query.page
+            return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1, id: route.params.id}
+        }
+    },
+    {
+        path: '/followers/:id',
+        component: Followers,
         props: route => {
             const page = route.query.page
             return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1, id: route.params.id}

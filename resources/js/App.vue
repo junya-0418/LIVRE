@@ -66,14 +66,14 @@
         .pc-main {
             margin-left: 300px;
             display: flex;
-            overflow-y: scroll;
+            /*overflow-y: scroll;*/
         }
 
         .main {
             background-color: black;
             float: left;
             position: fixed;
-            height: 100%;
+            /*height: 100%;*/
             color: #ccc;
             border-right: solid 1px #fff;
             width: 722px;
@@ -85,8 +85,8 @@
             color: #ccc;
             background-color: black;
             padding: 20px;
-            /*height: 100%;*/
-            /*overflow-y: scroll;*/
+            height: 100%;
+            overflow-y: scroll;
             border-left: solid 1px #fff;
         }
 

@@ -1,5 +1,6 @@
 <template>
 <div>
+
     <div class="user-main" style="display:flex;">
         <div class="d-flex flex-row">
             <i class="fas fa-user-circle fa-3x"></i>
@@ -36,30 +37,15 @@
 
     </Modal>
 
-    <div :class="{'loading': loading}" style="text-align: center;">
-        <div v-if="loading" class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
+    <div style="margin-left: 60px; display: inline-flex; margin-top: 30px;">
+        <select class="user-select2 custom-select custom-select-sm" v-model="selected" ref="element">
+            <option value="mybooks">マイライブラリの本</option>
+            <option value="wantbooks">読みたい本</option>
+        </select>
     </div>
 
-    <div class="users-books">
-        <div style="text-align: -webkit-center;">
-            <div class="mt-3 new-books-card" v-for="book in bookLists">
-                <div class="d-flex flex-row">
-                    <div class="font-weight-lighter">
-                        <div class="book-item">
-                            <RouterLink class="book_overlay" :to="`/books/${book.id}`">
-                                <img class="card-img library-img-size" :src="book.imageLinks" />
-                            </RouterLink>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div v-if="!loading">
-                <Pagination :uri="uri" :current-page="currentPage" :last-page="lastPage" />
-            </div>
-        </div>
-    </div>
+    <UserBooks :page="page" :id="id" v-if="selected === 'mybooks'"></UserBooks>
+    <Lists :page="page" :id="id" v-if="selected === 'wantbooks'"></Lists>
 
 </div>
 </template>
@@ -67,6 +53,8 @@
 <script>
     import Pagination from '../components/Pagination.vue'
     import FollowButton from "../components/FollowButton.vue";
+    import UserBooks from "./UserBooks";
+    import Lists from "./Lists";
     import Modal from "./Modal";
     import { mapState } from 'vuex'
 
@@ -85,7 +73,9 @@
         components: {
             Pagination,
             FollowButton,
-            Modal
+            Modal,
+            UserBooks,
+            Lists
         },
         data() {
             return {
@@ -95,7 +85,8 @@
                 showContent: false,
                 items: [],
                 title: '',
-                loading: false
+                loading: false,
+                selected: "mybooks"
             }
         },
         computed: {
@@ -108,6 +99,9 @@
                 },
                 currentPage: state => state.book.currentPage,
                 lastPage: state => state.book.lastPage,
+                userId () {
+                    return this.$store.getters['auth/userId']
+                },
             })
         },
         methods: {
@@ -161,6 +155,16 @@
 
 <style>
     @media (min-width: 980px) {
+        .user-select2 {
+            width: 210px;
+            border-radius: 15px;
+            float: right;
+            margin-right: 30px;
+            border-color: rgb(29, 161, 242);
+            background-color: rgb(32, 35, 39);
+            color: rgb(29, 161, 242) !important;
+        }
+
         .user-main {
             margin-top: 50px;
             width: 600px;
@@ -196,6 +200,16 @@
     }
 
     @media (max-width: 479px) {
+        .user-select {
+            width: 210px;
+            border-radius: 15px;
+            float: right;
+            margin-right: 30px;
+            border-color: rgb(29, 161, 242);
+            background-color: rgb(32, 35, 39);
+            color: rgb(29, 161, 242) !important;
+        }
+
         .user-main {
             margin-top: 90px;
             color: #CCCCCC;
